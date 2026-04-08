@@ -1,6 +1,5 @@
 //! Shared utility functions for language adapters.
 
-#![allow(dead_code)]
 
 use tree_sitter::Node;
 
