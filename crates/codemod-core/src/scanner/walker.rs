@@ -65,10 +65,7 @@ impl FileWalker {
     /// - Do not match the exclude patterns
     /// - Are not ignored by `.gitignore` (if configured)
     /// - Are smaller than `max_file_size`
-    pub fn collect_files(
-        &self,
-        language: &dyn LanguageAdapter,
-    ) -> crate::Result<Vec<PathBuf>> {
+    pub fn collect_files(&self, language: &dyn LanguageAdapter) -> crate::Result<Vec<PathBuf>> {
         let mut files = Vec::new();
 
         for entry in WalkDir::new(&self.target_dir)
@@ -76,9 +73,8 @@ impl FileWalker {
             .into_iter()
             .filter_entry(|e| !self.is_hidden(e.path()))
         {
-            let entry = entry.map_err(|e| {
-                CodemodError::Scan(format!("Error walking directory: {e}"))
-            })?;
+            let entry =
+                entry.map_err(|e| CodemodError::Scan(format!("Error walking directory: {e}")))?;
 
             let path = entry.path();
 
@@ -141,15 +137,14 @@ impl FileWalker {
 
         let mut builder = GlobSetBuilder::new();
         for pat in patterns {
-            let glob = Glob::new(pat).map_err(|e| {
-                CodemodError::Scan(format!("Invalid glob pattern '{pat}': {e}"))
-            })?;
+            let glob = Glob::new(pat)
+                .map_err(|e| CodemodError::Scan(format!("Invalid glob pattern '{pat}': {e}")))?;
             builder.add(glob);
         }
 
-        let set = builder.build().map_err(|e| {
-            CodemodError::Scan(format!("Failed to build glob set: {e}"))
-        })?;
+        let set = builder
+            .build()
+            .map_err(|e| CodemodError::Scan(format!("Failed to build glob set: {e}")))?;
 
         Ok(Some(set))
     }

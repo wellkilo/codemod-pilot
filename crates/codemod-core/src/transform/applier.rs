@@ -26,11 +26,7 @@ impl TransformApplier {
     ///
     /// Returns [`CodemodError::Transform`] if a replacement cannot be
     /// constructed (e.g. a variable binding is missing).
-    pub fn apply(
-        source: &str,
-        pattern: &Pattern,
-        matches: &[Match],
-    ) -> crate::Result<String> {
+    pub fn apply(source: &str, pattern: &Pattern, matches: &[Match]) -> crate::Result<String> {
         if matches.is_empty() {
             return Ok(source.to_string());
         }

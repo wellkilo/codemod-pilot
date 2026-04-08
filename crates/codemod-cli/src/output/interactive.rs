@@ -28,6 +28,7 @@ impl InteractivePrompt {
     }
 
     /// Print a styled warning message and ask for confirmation.
+    #[allow(dead_code)]
     pub fn confirm_destructive(action: &str, details: &str) -> Result<bool> {
         println!();
         println!("  {} {}", "WARNING".bold().yellow(), action.bold());

@@ -100,9 +100,7 @@ impl CodemodRule {
             return Err(CodemodError::Rule("Rule name must not be empty".into()));
         }
         if self.language.trim().is_empty() {
-            return Err(CodemodError::Rule(
-                "Rule language must not be empty".into(),
-            ));
+            return Err(CodemodError::Rule("Rule language must not be empty".into()));
         }
         if self.pattern.before.trim().is_empty() {
             return Err(CodemodError::Rule(
@@ -127,8 +125,7 @@ impl CodemodRule {
     ///
     /// Variables are detected by the `$name` syntax in the templates.
     pub fn to_pattern(&self) -> crate::pattern::Pattern {
-        let variables =
-            Self::extract_variables(&self.pattern.before, &self.pattern.after);
+        let variables = Self::extract_variables(&self.pattern.before, &self.pattern.after);
         crate::pattern::Pattern::new(
             self.pattern.before.clone(),
             self.pattern.after.clone(),
@@ -141,10 +138,7 @@ impl CodemodRule {
     /// Extract pattern variables from the before and after templates.
     ///
     /// A variable is any token matching `$[a-zA-Z_][a-zA-Z0-9_]*`.
-    fn extract_variables(
-        before: &str,
-        after: &str,
-    ) -> Vec<crate::pattern::PatternVar> {
+    fn extract_variables(before: &str, after: &str) -> Vec<crate::pattern::PatternVar> {
         let mut seen = std::collections::HashSet::new();
         let mut vars = Vec::new();
 
@@ -229,8 +223,7 @@ mod tests {
 
     #[test]
     fn test_extract_variables() {
-        let vars =
-            CodemodRule::extract_variables("foo($arg1, $arg2)", "bar($arg1, $arg2)");
+        let vars = CodemodRule::extract_variables("foo($arg1, $arg2)", "bar($arg1, $arg2)");
         assert_eq!(vars.len(), 2);
         assert_eq!(vars[0].name, "$arg1");
         assert_eq!(vars[1].name, "$arg2");

@@ -7,10 +7,10 @@ use clap::Args;
 use colored::Colorize;
 use indicatif::{ProgressBar, ProgressStyle};
 
+use codemod_core::transform::rollback::RollbackManager;
 use codemod_core::{
     Pattern, PatternMatcher, ScanConfig, Scanner, TransformApplier, TransformResult,
 };
-use codemod_core::transform::rollback::RollbackManager;
 use codemod_languages::get_language;
 
 use crate::config::SessionState;
@@ -78,8 +78,8 @@ pub fn execute(args: ApplyArgs) -> Result<()> {
     // Load pattern.
     let (pattern, language, include, exclude) = load_pattern_and_config(&args)?;
 
-    let adapter = get_language(&language)
-        .with_context(|| format!("Unsupported language: {}", language))?;
+    let adapter =
+        get_language(&language).with_context(|| format!("Unsupported language: {}", language))?;
 
     // Scan for matches.
     let config = ScanConfig {
@@ -97,8 +97,8 @@ pub fn execute(args: ApplyArgs) -> Result<()> {
         ProgressStyle::with_template("{spinner:.green} {msg}")
             .unwrap()
             .tick_strings(&[
-                "\u{28cb}", "\u{28d9}", "\u{28f9}", "\u{28f8}", "\u{28fc}",
-                "\u{28f4}", "\u{28e6}", "\u{28e7}", "\u{28c7}", "\u{28cf}",
+                "\u{28cb}", "\u{28d9}", "\u{28f9}", "\u{28f8}", "\u{28fc}", "\u{28f4}", "\u{28e6}",
+                "\u{28e7}", "\u{28c7}", "\u{28cf}",
             ]),
     );
     pb.set_message("Scanning for matches...");
@@ -131,19 +131,13 @@ pub fn execute(args: ApplyArgs) -> Result<()> {
     if args.preview {
         for result in &transform_results {
             if result.has_changes() {
-                DiffPrinter::print_diff(
-                    result.file_path.to_string_lossy().as_ref(),
-                    &result.diff,
-                );
+                DiffPrinter::print_diff(result.file_path.to_string_lossy().as_ref(), &result.diff);
             }
         }
         let total_applied: usize = transform_results.iter().map(|r| r.applied_count).sum();
         DiffPrinter::print_summary(transform_results.len(), total_applied, 0);
         println!();
-        println!(
-            "Run with {} to apply these changes.",
-            "--execute".cyan()
-        );
+        println!("Run with {} to apply these changes.", "--execute".cyan());
         return Ok(());
     }
 
@@ -152,10 +146,7 @@ pub fn execute(args: ApplyArgs) -> Result<()> {
         // Show a summary of changes.
         for result in &transform_results {
             if result.has_changes() {
-                DiffPrinter::print_diff(
-                    result.file_path.to_string_lossy().as_ref(),
-                    &result.diff,
-                );
+                DiffPrinter::print_diff(result.file_path.to_string_lossy().as_ref(), &result.diff);
             }
         }
 
@@ -185,31 +176,23 @@ pub fn execute(args: ApplyArgs) -> Result<()> {
         // Apply changes: write new content to files.
         let apply_pb = ProgressBar::new(transform_results.len() as u64);
         apply_pb.set_style(
-            ProgressStyle::with_template(
-                "{spinner:.green} [{bar:40.cyan/blue}] {pos}/{len} files",
-            )
-            .unwrap()
-            .progress_chars("=> "),
+            ProgressStyle::with_template("{spinner:.green} [{bar:40.cyan/blue}] {pos}/{len} files")
+                .unwrap()
+                .progress_chars("=> "),
         );
 
         let mut applied_count = 0usize;
         for result in &transform_results {
             if result.has_changes() {
                 std::fs::write(&result.file_path, &result.new_content)
-                    .with_context(|| {
-                        format!("Failed to write {}", result.file_path.display())
-                    })?;
+                    .with_context(|| format!("Failed to write {}", result.file_path.display()))?;
                 applied_count += 1;
             }
             apply_pb.inc(1);
         }
         apply_pb.finish_and_clear();
 
-        DiffPrinter::print_summary(
-            transform_results.len(),
-            total_applied,
-            total_applied,
-        );
+        DiffPrinter::print_summary(transform_results.len(), total_applied, total_applied);
 
         println!();
         println!(
@@ -218,10 +201,7 @@ pub fn execute(args: ApplyArgs) -> Result<()> {
             applied_count.to_string().yellow(),
             rollback_path.display().to_string().dimmed()
         );
-        println!(
-            "  Run {} to undo.",
-            "codemod-pilot apply --rollback".cyan()
-        );
+        println!("  Run {} to undo.", "codemod-pilot apply --rollback".cyan());
     }
 
     Ok(())
@@ -260,10 +240,7 @@ fn execute_rollback() -> Result<()> {
     let selection = if entries.len() == 1 {
         0
     } else {
-        let options: Vec<&str> = entries
-            .iter()
-            .map(|e| e.description.as_str())
-            .collect();
+        let options: Vec<&str> = entries.iter().map(|e| e.description.as_str()).collect();
         InteractivePrompt::select("Select rollback to apply:", &options)?
     };
 
@@ -311,10 +288,9 @@ fn load_pattern_and_config(
         Ok((pattern, rule.language.clone(), inc, exc))
     } else {
         let project_root = std::env::current_dir()?;
-        let session = SessionState::load(&project_root)?
-            .with_context(|| {
-                "No active session. Run `codemod-pilot learn` first or provide --rule"
-            })?;
+        let session = SessionState::load(&project_root)?.with_context(|| {
+            "No active session. Run `codemod-pilot learn` first or provide --rule"
+        })?;
         let pattern = session
             .pattern
             .with_context(|| "Session has no inferred pattern")?;
@@ -334,10 +310,7 @@ fn group_matches_by_file(
     use std::collections::BTreeMap;
     let mut groups: BTreeMap<PathBuf, Vec<&codemod_core::ScanMatch>> = BTreeMap::new();
     for m in matches {
-        groups
-            .entry(m.file_path.clone())
-            .or_default()
-            .push(m);
+        groups.entry(m.file_path.clone()).or_default().push(m);
     }
     groups.into_iter().collect()
 }

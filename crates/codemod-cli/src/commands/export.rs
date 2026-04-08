@@ -47,12 +47,9 @@ pub fn execute(args: ExportArgs) -> Result<()> {
         .with_context(|| "Session has no inferred pattern to export")?;
 
     // Build rule name.
-    let rule_name = args.name.unwrap_or_else(|| {
-        format!(
-            "codemod-{}",
-            chrono::Utc::now().format("%Y%m%d-%H%M%S")
-        )
-    });
+    let rule_name = args
+        .name
+        .unwrap_or_else(|| format!("codemod-{}", chrono::Utc::now().format("%Y%m%d-%H%M%S")));
 
     let description = args
         .description

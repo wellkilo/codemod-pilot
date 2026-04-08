@@ -73,19 +73,13 @@ impl DiffPrinter {
         println!("{}", "\u{2500}".repeat(72).dimmed());
         println!();
         println!("  {}", "Summary".bold().underline());
-        println!(
-            "    Files affected:  {}",
-            total_files.to_string().yellow()
-        );
+        println!("    Files affected:  {}", total_files.to_string().yellow());
         println!(
             "    Total matches:   {}",
             total_matches.to_string().yellow()
         );
         if total_applied > 0 {
-            println!(
-                "    Changes applied: {}",
-                total_applied.to_string().green()
-            );
+            println!("    Changes applied: {}", total_applied.to_string().green());
         }
         println!();
     }

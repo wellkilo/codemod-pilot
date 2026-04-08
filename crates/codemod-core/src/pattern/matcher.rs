@@ -68,11 +68,7 @@ impl PatternMatcher {
     ///
     /// Returns [`CodemodError::Parse`] if the source or the pattern template
     /// cannot be parsed.
-    pub fn find_matches(
-        &self,
-        source: &str,
-        pattern: &Pattern,
-    ) -> crate::Result<Vec<Match>> {
+    pub fn find_matches(&self, source: &str, pattern: &Pattern) -> crate::Result<Vec<Match>> {
         // 1. Parse the before_template to get its AST shape.
         let template_tree = self.parse(&pattern.before_template)?;
         // 2. Parse the target source.

@@ -28,8 +28,14 @@ fn test_generate_diff_basic() {
         diff.contains("+++ b/test.ts"),
         "diff should contain new file header"
     );
-    assert!(diff.contains("-let x = foo(1);"), "diff should show removed lines");
-    assert!(diff.contains("+let x = bar(1);"), "diff should show added lines");
+    assert!(
+        diff.contains("-let x = foo(1);"),
+        "diff should show removed lines"
+    );
+    assert!(
+        diff.contains("+let x = bar(1);"),
+        "diff should show added lines"
+    );
 }
 
 #[test]
@@ -100,12 +106,7 @@ fn test_transform_result_has_changes() {
 // ---------------------------------------------------------------------------
 
 /// Helper to construct a `Match` value for testing.
-fn make_match(
-    start: usize,
-    end: usize,
-    text: &str,
-    bindings: Vec<(&str, &str)>,
-) -> Match {
+fn make_match(start: usize, end: usize, text: &str, bindings: Vec<(&str, &str)>) -> Match {
     Match {
         byte_range: start..end,
         start_position: Position {

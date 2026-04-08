@@ -27,12 +27,12 @@ pub mod transform;
 // Re-export core types at crate root for ergonomic access.
 pub use error::{CodemodError, Result};
 pub use language::LanguageAdapter;
-pub use pattern::{Pattern, PatternInferrer, PatternMatcher, PatternVar};
 pub use pattern::validator::{PatternValidator, ValidationResult};
-pub use rule::{CodemodRule, RuleConfig};
+pub use pattern::{Pattern, PatternInferrer, PatternMatcher, PatternVar};
 pub use rule::builtin::BuiltinRules;
 pub use rule::schema::RulePattern;
+pub use rule::{CodemodRule, RuleConfig};
 pub use scanner::{ScanConfig, ScanMatch, ScanResult, Scanner};
-pub use transform::{TransformApplier, TransformResult};
 pub use transform::conflict::ConflictResolver;
 pub use transform::rollback::{RollbackEntry, RollbackManager};
+pub use transform::{TransformApplier, TransformResult};

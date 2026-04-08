@@ -68,24 +68,12 @@ pub fn execute(args: ListArgs) -> Result<()> {
                     "  {:<35} {:<15} {}",
                     rule.name.green(),
                     rule.language,
-                    rule.description
-                        .lines()
-                        .next()
-                        .unwrap_or("")
-                        .dimmed()
+                    rule.description.lines().next().unwrap_or("").dimmed()
                 );
 
                 if args.details {
-                    println!(
-                        "    {} {}",
-                        "Before:".bold().red(),
-                        rule.pattern.before
-                    );
-                    println!(
-                        "    {} {}",
-                        "After: ".bold().green(),
-                        rule.pattern.after
-                    );
+                    println!("    {} {}", "Before:".bold().red(), rule.pattern.before);
+                    println!("    {} {}", "After: ".bold().green(), rule.pattern.after);
                     if !rule.config.include.is_empty() {
                         println!(
                             "    {} {}",

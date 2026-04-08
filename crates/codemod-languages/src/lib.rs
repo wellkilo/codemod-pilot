@@ -5,6 +5,7 @@
 
 pub mod javascript;
 pub mod typescript;
+#[allow(dead_code)]
 mod utils;
 
 use codemod_core::language::LanguageAdapter;

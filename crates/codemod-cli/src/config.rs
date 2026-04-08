@@ -36,8 +36,8 @@ impl SessionState {
         }
         let content = std::fs::read_to_string(&path)
             .with_context(|| format!("Failed to read session file: {}", path.display()))?;
-        let state: SessionState = serde_json::from_str(&content)
-            .with_context(|| "Failed to parse session file")?;
+        let state: SessionState =
+            serde_json::from_str(&content).with_context(|| "Failed to parse session file")?;
         Ok(Some(state))
     }
 
@@ -56,6 +56,7 @@ impl SessionState {
     }
 
     /// Clear (remove) the session state file.
+    #[allow(dead_code)]
     pub fn clear(project_root: &Path) -> Result<()> {
         let path = session_path(project_root);
         if path.exists() {

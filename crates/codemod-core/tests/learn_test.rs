@@ -5,8 +5,8 @@
 //! structures (`Pattern`, `PatternVar`) behave correctly in realistic
 //! scenarios and that YAML round-tripping works as expected.
 
-use codemod_core::pattern::{Pattern, PatternVar};
 use codemod_core::pattern::validator::PatternValidator;
+use codemod_core::pattern::{Pattern, PatternVar};
 
 // ---------------------------------------------------------------------------
 // Pattern construction and property tests
@@ -278,8 +278,7 @@ fn test_fixture_files_exist_and_differ() {
         );
 
         for before_entry in &before_files {
-            let before_content =
-                std::fs::read_to_string(before_entry.path()).unwrap();
+            let before_content = std::fs::read_to_string(before_entry.path()).unwrap();
             assert!(
                 !before_content.trim().is_empty(),
                 "{dir_name}/before file should not be empty"
@@ -287,18 +286,14 @@ fn test_fixture_files_exist_and_differ() {
 
             // Derive the corresponding after file
             let before_name = before_entry.file_name();
-            let after_name = before_name
-                .to_str()
-                .unwrap()
-                .replace("before.", "after.");
+            let after_name = before_name.to_str().unwrap().replace("before.", "after.");
             let after_path = dir.join(&after_name);
             assert!(
                 after_path.exists(),
                 "Fixture {dir_name} should have a corresponding {after_name}"
             );
 
-            let after_content =
-                std::fs::read_to_string(&after_path).unwrap();
+            let after_content = std::fs::read_to_string(&after_path).unwrap();
             assert!(
                 !after_content.trim().is_empty(),
                 "{dir_name}/{after_name} should not be empty"

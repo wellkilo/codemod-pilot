@@ -4,11 +4,11 @@
 
 **Transform your codebase by example. No AST knowledge required.**
 
-[![CI](https://github.com/codemod-pilot/codemod-pilot/actions/workflows/ci.yml/badge.svg)](https://github.com/codemod-pilot/codemod-pilot/actions/workflows/ci.yml)
+[![CI](https://github.com/wellkilo/codemod-pilot/actions/workflows/ci.yml/badge.svg)](https://github.com/wellkilo/codemod-pilot/actions/workflows/ci.yml)
 [![Crates.io](https://img.shields.io/crates/v/codemod-pilot.svg)](https://crates.io/crates/codemod-pilot)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
-**[🇨🇳 简体中文](#简体中文) · [🇺🇸 English](#english)**
+**[🇺🇸 English](#-English) · [🇨🇳 简体中文](#-简体中文)**
 
 </div>
 

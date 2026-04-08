@@ -26,8 +26,7 @@ use crate::error::CodemodError;
 /// - [`CodemodError::Rule`] if the YAML is malformed or the rule fails
 ///   validation.
 pub fn load_rule(path: &Path) -> crate::Result<CodemodRule> {
-    let content =
-        std::fs::read_to_string(path).map_err(CodemodError::Io)?;
+    let content = std::fs::read_to_string(path).map_err(CodemodError::Io)?;
     let rule: CodemodRule = serde_yaml::from_str(&content)
         .map_err(|e| CodemodError::Rule(format!("Failed to parse rule file: {e}")))?;
     rule.validate()?;

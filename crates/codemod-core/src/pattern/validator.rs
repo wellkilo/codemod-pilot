@@ -119,10 +119,9 @@ impl PatternValidator {
         let mut seen = std::collections::HashSet::new();
         for var in &pattern.variables {
             if !seen.insert(&var.name) {
-                result.warnings.push(format!(
-                    "Duplicate variable name '{}'",
-                    var.name
-                ));
+                result
+                    .warnings
+                    .push(format!("Duplicate variable name '{}'", var.name));
             }
         }
 

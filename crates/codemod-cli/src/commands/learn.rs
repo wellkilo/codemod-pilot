@@ -4,8 +4,8 @@ use anyhow::{Context, Result};
 use clap::Args;
 use colored::Colorize;
 
-use codemod_core::PatternInferrer;
 use codemod_core::pattern::validator::PatternValidator;
+use codemod_core::PatternInferrer;
 use codemod_languages::get_language;
 
 use crate::config::SessionState;
@@ -50,15 +50,15 @@ pub fn execute(args: LearnArgs) -> Result<()> {
 
     // 1. Resolve language adapter.
     let lang_name = args.language.clone();
-    let adapter = get_language(&lang_name)
-        .with_context(|| format!("Unsupported language: {}", lang_name))?;
+    let adapter =
+        get_language(&lang_name).with_context(|| format!("Unsupported language: {}", lang_name))?;
 
     // 2. Collect examples.
     let examples: Vec<(String, String)> = if let Some(ref examples_path) = args.examples {
         let content = std::fs::read_to_string(examples_path)
             .with_context(|| format!("Failed to read examples file: {}", examples_path))?;
-        let file: ExamplesFile = serde_yaml::from_str(&content)
-            .with_context(|| "Failed to parse examples YAML")?;
+        let file: ExamplesFile =
+            serde_yaml::from_str(&content).with_context(|| "Failed to parse examples YAML")?;
         file.examples
             .into_iter()
             .map(|e| (e.before, e.after))
@@ -101,8 +101,8 @@ pub fn execute(args: LearnArgs) -> Result<()> {
     };
 
     // 4. Validate the pattern.
-    let validation = PatternValidator::validate(&pattern)
-        .with_context(|| "Pattern validation failed")?;
+    let validation =
+        PatternValidator::validate(&pattern).with_context(|| "Pattern validation failed")?;
 
     if !validation.is_valid {
         println!("{} Pattern validation errors:", "ERROR".bold().red());

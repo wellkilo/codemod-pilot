@@ -153,10 +153,7 @@ impl PatternInferrer {
     ///
     /// Returns [`CodemodError::PatternInference`] if no consistent pattern
     /// can be derived across the supplied examples.
-    pub fn infer_from_examples(
-        &self,
-        examples: &[(String, String)],
-    ) -> crate::Result<Pattern> {
+    pub fn infer_from_examples(&self, examples: &[(String, String)]) -> crate::Result<Pattern> {
         if examples.is_empty() {
             return Err(CodemodError::PatternInference(
                 "At least one example pair is required".into(),
@@ -178,9 +175,7 @@ impl PatternInferrer {
                     if Self::patterns_compatible(&pattern, &other) {
                         confirmed += 1;
                     } else {
-                        log::warn!(
-                            "Example pair produced an incompatible pattern — skipping"
-                        );
+                        log::warn!("Example pair produced an incompatible pattern — skipping");
                     }
                 }
                 Err(e) => {
@@ -432,10 +427,7 @@ impl PatternInferrer {
         }
 
         // Both are leaf nodes of the same kind — treat as a variable change.
-        if before.children.is_empty()
-            && after.children.is_empty()
-            && before.kind == after.kind
-        {
+        if before.children.is_empty() && after.children.is_empty() && before.kind == after.kind {
             return DiffKind::Changed {
                 before_text: before.text.clone(),
                 after_text: after.text.clone(),
@@ -471,10 +463,7 @@ impl PatternInferrer {
         }
 
         let total_len = before_template.len() as f64;
-        let var_len: f64 = variables
-            .iter()
-            .map(|v| v.name.len() as f64)
-            .sum();
+        let var_len: f64 = variables.iter().map(|v| v.name.len() as f64).sum();
 
         // Fixed ratio: how much of the template is literal code.
         let fixed_ratio = 1.0 - (var_len / total_len).min(1.0);
@@ -561,7 +550,10 @@ mod tests {
             },
         ];
         let conf = PatternInferrer::compute_confidence(&vars, "foo($var1, $var2)", "");
-        assert!(conf > 0.0 && conf < 1.0, "expected moderate confidence, got {conf}");
+        assert!(
+            conf > 0.0 && conf < 1.0,
+            "expected moderate confidence, got {conf}"
+        );
     }
 
     #[test]
@@ -569,14 +561,20 @@ mod tests {
         let a = Pattern::new(
             "foo($var1)".into(),
             "bar($var1)".into(),
-            vec![PatternVar { name: "$var1".into(), node_type: None }],
+            vec![PatternVar {
+                name: "$var1".into(),
+                node_type: None,
+            }],
             "stub".into(),
             0.9,
         );
         let b = Pattern::new(
             "foo($var1)".into(),
             "bar($var1)".into(),
-            vec![PatternVar { name: "$var1".into(), node_type: None }],
+            vec![PatternVar {
+                name: "$var1".into(),
+                node_type: None,
+            }],
             "stub".into(),
             0.8,
         );
@@ -588,7 +586,10 @@ mod tests {
         let a = Pattern::new(
             "foo($var1)".into(),
             "bar($var1)".into(),
-            vec![PatternVar { name: "$var1".into(), node_type: None }],
+            vec![PatternVar {
+                name: "$var1".into(),
+                node_type: None,
+            }],
             "stub".into(),
             0.9,
         );
@@ -596,8 +597,14 @@ mod tests {
             "foo($var1, $var2)".into(),
             "bar($var1, $var2)".into(),
             vec![
-                PatternVar { name: "$var1".into(), node_type: None },
-                PatternVar { name: "$var2".into(), node_type: None },
+                PatternVar {
+                    name: "$var1".into(),
+                    node_type: None,
+                },
+                PatternVar {
+                    name: "$var2".into(),
+                    node_type: None,
+                },
             ],
             "stub".into(),
             0.8,

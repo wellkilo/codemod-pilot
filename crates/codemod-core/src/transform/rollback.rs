@@ -66,10 +66,7 @@ impl RollbackManager {
     /// Save a rollback entry for the given transformation results.
     ///
     /// Returns the path to the saved rollback JSON file.
-    pub fn save_rollback(
-        &self,
-        results: &[super::TransformResult],
-    ) -> crate::Result<PathBuf> {
+    pub fn save_rollback(&self, results: &[super::TransformResult]) -> crate::Result<PathBuf> {
         // Ensure directory exists.
         fs::create_dir_all(&self.rollback_dir)?;
 
@@ -112,9 +109,8 @@ impl RollbackManager {
     /// Returns the number of files restored.
     pub fn apply_rollback(&self, patch_path: &Path) -> crate::Result<usize> {
         let content = fs::read_to_string(patch_path)?;
-        let data: RollbackData = serde_json::from_str(&content).map_err(|e| {
-            CodemodError::Transform(format!("Failed to parse rollback file: {e}"))
-        })?;
+        let data: RollbackData = serde_json::from_str(&content)
+            .map_err(|e| CodemodError::Transform(format!("Failed to parse rollback file: {e}")))?;
 
         let mut restored = 0usize;
         for file in &data.files {
@@ -123,10 +119,7 @@ impl RollbackManager {
                 restored += 1;
                 log::info!("Restored {}", file.path.display());
             } else {
-                log::warn!(
-                    "Skipping {} — file does not exist",
-                    file.path.display()
-                );
+                log::warn!("Skipping {} — file does not exist", file.path.display());
             }
         }
 
@@ -151,10 +144,7 @@ impl RollbackManager {
             match self.read_rollback_entry(&path) {
                 Ok(re) => entries.push(re),
                 Err(e) => {
-                    log::warn!(
-                        "Skipping malformed rollback file {}: {e}",
-                        path.display()
-                    );
+                    log::warn!("Skipping malformed rollback file {}: {e}", path.display());
                 }
             }
         }
@@ -172,9 +162,8 @@ impl RollbackManager {
     /// Read a single rollback file and produce a [`RollbackEntry`].
     fn read_rollback_entry(&self, path: &Path) -> crate::Result<RollbackEntry> {
         let content = fs::read_to_string(path)?;
-        let data: RollbackData = serde_json::from_str(&content).map_err(|e| {
-            CodemodError::Transform(format!("Failed to parse rollback file: {e}"))
-        })?;
+        let data: RollbackData = serde_json::from_str(&content)
+            .map_err(|e| CodemodError::Transform(format!("Failed to parse rollback file: {e}")))?;
 
         Ok(RollbackEntry {
             path: path.to_path_buf(),

@@ -6,8 +6,8 @@
 
 use std::path::Path;
 
-use codemod_core::rule::schema::{CodemodRule, RuleConfig, RulePattern};
 use codemod_core::rule::builtin::BuiltinRules;
+use codemod_core::rule::schema::{CodemodRule, RuleConfig, RulePattern};
 use codemod_core::rule::{load_rule, save_rule};
 
 // ---------------------------------------------------------------------------
@@ -305,9 +305,8 @@ fn test_load_rules_from_rules_directory() {
 #[test]
 fn test_builtin_rules_all_valid() {
     for rule in BuiltinRules::all() {
-        rule.validate().unwrap_or_else(|e| {
-            panic!("Built-in rule '{}' failed validation: {e}", rule.name)
-        });
+        rule.validate()
+            .unwrap_or_else(|e| panic!("Built-in rule '{}' failed validation: {e}", rule.name));
     }
 }
 

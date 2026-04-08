@@ -49,9 +49,7 @@ impl BuiltinRules {
     pub fn replace_println_with_log() -> CodemodRule {
         CodemodRule {
             name: "replace-println-with-log".into(),
-            description:
-                "Replace println!() calls with log::info!() for structured logging"
-                    .into(),
+            description: "Replace println!() calls with log::info!() for structured logging".into(),
             language: "rust".into(),
             version: "1.0".into(),
             pattern: RulePattern {
@@ -80,8 +78,7 @@ impl BuiltinRules {
         CodemodRule {
             name: "replace-unwrap-with-expect".into(),
             description:
-                "Replace .unwrap() with .expect(\"...\") to encourage better error messages"
-                    .into(),
+                "Replace .unwrap() with .expect(\"...\") to encourage better error messages".into(),
             language: "rust".into(),
             version: "1.0".into(),
             pattern: RulePattern {
@@ -107,9 +104,8 @@ impl BuiltinRules {
     pub fn replace_deprecated_trim() -> CodemodRule {
         CodemodRule {
             name: "replace-deprecated-trim".into(),
-            description:
-                "Replace deprecated trim_left()/trim_right() with trim_start()/trim_end()"
-                    .into(),
+            description: "Replace deprecated trim_left()/trim_right() with trim_start()/trim_end()"
+                .into(),
             language: "rust".into(),
             version: "1.0".into(),
             pattern: RulePattern {
@@ -133,9 +129,8 @@ mod tests {
     #[test]
     fn test_all_rules_valid() {
         for rule in BuiltinRules::all() {
-            rule.validate().unwrap_or_else(|e| {
-                panic!("Built-in rule '{}' failed validation: {e}", rule.name)
-            });
+            rule.validate()
+                .unwrap_or_else(|e| panic!("Built-in rule '{}' failed validation: {e}", rule.name));
         }
     }
 

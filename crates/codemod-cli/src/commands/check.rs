@@ -76,10 +76,9 @@ pub fn execute(args: CheckArgs) -> Result<()> {
         (pattern, rule.language.clone(), inc, exc)
     } else {
         let project_root = std::env::current_dir()?;
-        let session = SessionState::load(&project_root)?
-            .with_context(|| {
-                "No active session. Run `codemod-pilot learn` first or provide --rule"
-            })?;
+        let session = SessionState::load(&project_root)?.with_context(|| {
+            "No active session. Run `codemod-pilot learn` first or provide --rule"
+        })?;
         let pattern = session
             .pattern
             .with_context(|| "Session has no inferred pattern")?;
@@ -91,8 +90,8 @@ pub fn execute(args: CheckArgs) -> Result<()> {
         )
     };
 
-    let adapter = get_language(&language)
-        .with_context(|| format!("Unsupported language: {}", language))?;
+    let adapter =
+        get_language(&language).with_context(|| format!("Unsupported language: {}", language))?;
 
     let config = ScanConfig {
         target_dir: target,

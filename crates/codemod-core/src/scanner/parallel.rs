@@ -77,7 +77,13 @@ pub fn scan_files_parallel(
 
     files.par_iter().for_each(|file_path| {
         let file_result = scan_single_file(
-            file_path, &pattern, &lang_name, &lang_obj, &lang_exts, &lang_stmts, &lang_exprs,
+            file_path,
+            &pattern,
+            &lang_name,
+            &lang_obj,
+            &lang_exts,
+            &lang_stmts,
+            &lang_exprs,
             &lang_ids,
         );
         results.lock().unwrap().push(file_result);

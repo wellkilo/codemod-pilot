@@ -65,10 +65,9 @@ pub fn execute(args: ScanArgs) -> Result<()> {
         (pattern, lang, inc, exc)
     } else {
         let project_root = std::env::current_dir()?;
-        let session = SessionState::load(&project_root)?
-            .with_context(|| {
-                "No active session. Run `codemod-pilot learn` first or provide --rule"
-            })?;
+        let session = SessionState::load(&project_root)?.with_context(|| {
+            "No active session. Run `codemod-pilot learn` first or provide --rule"
+        })?;
         let pattern = session
             .pattern
             .with_context(|| "Session has no inferred pattern")?;
@@ -80,8 +79,8 @@ pub fn execute(args: ScanArgs) -> Result<()> {
         )
     };
 
-    let adapter = get_language(&language)
-        .with_context(|| format!("Unsupported language: {}", language))?;
+    let adapter =
+        get_language(&language).with_context(|| format!("Unsupported language: {}", language))?;
 
     // Setup scanner config.
     let config = ScanConfig {
@@ -100,16 +99,14 @@ pub fn execute(args: ScanArgs) -> Result<()> {
         ProgressStyle::with_template("{spinner:.green} {msg}")
             .unwrap()
             .tick_strings(&[
-                "\u{28cb}", "\u{28d9}", "\u{28f9}", "\u{28f8}", "\u{28fc}",
-                "\u{28f4}", "\u{28e6}", "\u{28e7}", "\u{28c7}", "\u{28cf}",
+                "\u{28cb}", "\u{28d9}", "\u{28f9}", "\u{28f8}", "\u{28fc}", "\u{28f4}", "\u{28e6}",
+                "\u{28e7}", "\u{28c7}", "\u{28cf}",
             ]),
     );
     pb.set_message("Scanning files...");
     pb.enable_steady_tick(std::time::Duration::from_millis(80));
 
-    let result = scanner
-        .scan(&pattern)
-        .with_context(|| "Scan failed")?;
+    let result = scanner.scan(&pattern).with_context(|| "Scan failed")?;
     pb.finish_and_clear();
 
     // Output results.
