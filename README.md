@@ -5,7 +5,7 @@
 **Transform your codebase by example. No AST knowledge required.**
 
 [![CI](https://github.com/wellkilo/codemod-pilot/actions/workflows/ci.yml/badge.svg)](https://github.com/wellkilo/codemod-pilot/actions/workflows/ci.yml)
-[![Crates.io](https://img.shields.io/crates/v/codemod-pilot.svg)](https://crates.io/crates/codemod-cli)
+[![Crates.io](https://img.shields.io/crates/v/codemod-cli.svg)](https://crates.io/crates/codemod-cli)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
 **[🇺🇸 English](#-English) · [🇨🇳 简体中文](#-简体中文)**
