@@ -16,8 +16,8 @@ name = "codemod-pilot"
 path = "src/main.rs"
 
 [dependencies]
-codemod-core = { path = "../codemod-core", version = "0.1.0" }
-codemod-languages = { path = "../codemod-languages", version = "0.1.0" }
+codemod-core = { path = "../codemod-core", version = "0.1.1" }
+codemod-languages = { path = "../codemod-languages", version = "0.1.1" }
 clap.workspace = true
 colored.workspace = true
 similar.workspace = true

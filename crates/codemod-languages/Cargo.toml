@@ -12,7 +12,7 @@ categories.workspace = true
 description = "Language support plugins for codemod-pilot"
 
 [dependencies]
-codemod-core = { path = "../codemod-core", version = "0.1.0" }
+codemod-core = { path = "../codemod-core", version = "0.1.1" }
 tree-sitter.workspace = true
 tree-sitter-javascript.workspace = true
 tree-sitter-typescript.workspace = true
