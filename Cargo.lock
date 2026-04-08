@@ -206,6 +206,7 @@ dependencies = [
  "serde_json",
  "serde_yaml",
  "similar",
+ "tempfile",
  "thiserror 2.0.18",
  "tree-sitter",
  "walkdir",

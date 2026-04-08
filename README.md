@@ -5,7 +5,7 @@
 **Transform your codebase by example. No AST knowledge required.**
 
 [![CI](https://github.com/wellkilo/codemod-pilot/actions/workflows/ci.yml/badge.svg)](https://github.com/wellkilo/codemod-pilot/actions/workflows/ci.yml)
-[![Crates.io](https://img.shields.io/crates/v/codemod-pilot.svg)](https://crates.io/crates/codemod-pilot)
+[![Crates.io](https://img.shields.io/crates/v/codemod-pilot.svg)](https://crates.io/crates/codemod-cli)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
 **[🇺🇸 English](#-English) · [🇨🇳 简体中文](#-简体中文)**
@@ -68,7 +68,7 @@ codemod-pilot apply --execute
 
 ```bash
 # Via cargo
-cargo install codemod-pilot
+cargo install codemod-cli
 
 # Via curl (Linux/macOS)
 curl -fsSL https://raw.githubusercontent.com/wellkilo/codemod-pilot/main/scripts/install.sh | sh
@@ -332,7 +332,7 @@ codemod-pilot apply --execute
 
 ```bash
 # 通过 cargo
-cargo install codemod-pilot
+cargo install codemod-cli
 
 # 通过 curl (Linux/macOS)
 curl -fsSL https://raw.githubusercontent.com/wellkilo/codemod-pilot/main/scripts/install.sh | sh
