@@ -1,0 +1,16 @@
+name: migrate-import-syntax
+description: Migrate CommonJS require() to ES module import syntax
+language: typescript
+version: "1.0"
+
+pattern:
+  before: "const $name = require('$module')"
+  after: "import $name from '$module'"
+
+config:
+  include:
+    - "src/**/*.ts"
+    - "src/**/*.js"
+  exclude:
+    - "**/*.config.js"
+    - "**/*.config.ts"

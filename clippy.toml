@@ -1,0 +1,11 @@
+# clippy configuration for codemod-pilot
+# See: https://doc.rust-lang.org/clippy/configuration.html
+
+# Minimum Supported Rust Version
+msrv = "1.75.0"
+
+# Cognitive complexity threshold (default: 25)
+cognitive-complexity-threshold = 30
+
+# Maximum number of lines in a function body (default: 100)
+too-many-lines-threshold = 150

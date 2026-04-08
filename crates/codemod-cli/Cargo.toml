@@ -1,0 +1,27 @@
+[package]
+name = "codemod-cli"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "CLI interface for codemod-pilot"
+
+[[bin]]
+name = "codemod-pilot"
+path = "src/main.rs"
+
+[dependencies]
+codemod-core = { path = "../codemod-core" }
+codemod-languages = { path = "../codemod-languages" }
+clap.workspace = true
+colored.workspace = true
+similar.workspace = true
+indicatif.workspace = true
+dialoguer.workspace = true
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_yaml.workspace = true
+log.workspace = true
+env_logger.workspace = true
+chrono = "0.4"

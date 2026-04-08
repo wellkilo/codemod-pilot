@@ -1,0 +1,17 @@
+name: replace-console-log
+description: Replace console.log with a custom logger
+language: typescript
+version: "1.0"
+
+pattern:
+  before: "console.log($args)"
+  after: "logger.info($args)"
+
+config:
+  include:
+    - "src/**/*.ts"
+    - "src/**/*.tsx"
+  exclude:
+    - "**/*.test.ts"
+    - "**/*.spec.ts"
+    - "scripts/**"

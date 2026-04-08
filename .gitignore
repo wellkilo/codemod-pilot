@@ -1,0 +1,55 @@
+# Build artifacts
+/target/
+**/target/
+
+# Cargo lock for libraries (keep for binaries)
+# Cargo.lock is committed because we have a binary crate
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Debug
+*.pdb
+
+# Profiling
+perf.data
+perf.data.old
+flamegraph.svg
+
+# Benchmark output
+criterion/
+
+# Coverage
+*.profraw
+*.profdata
+lcov.info
+tarpaulin-report.html
+coverage/
+
+# Snapshot test reviews
+*.snap.new
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.bak
+*.orig

@@ -1,0 +1,15 @@
+name: rename-symbol
+description: Template rule for renaming a symbol across the codebase
+language: typescript
+version: "1.0"
+
+pattern:
+  before: "$oldName"
+  after: "$newName"
+
+config:
+  include: []
+  exclude:
+    - "node_modules/**"
+    - "dist/**"
+    - "build/**"
