@@ -1,6 +1,5 @@
 //! Shared utility functions for language adapters.
 
-
 use tree_sitter::Node;
 
 /// Collect all named children of a node.
