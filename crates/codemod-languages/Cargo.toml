@@ -4,10 +4,15 @@ version.workspace = true
 edition.workspace = true
 authors.workspace = true
 license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+readme.workspace = true
+keywords.workspace = true
+categories.workspace = true
 description = "Language support plugins for codemod-pilot"
 
 [dependencies]
-codemod-core = { path = "../codemod-core" }
+codemod-core = { path = "../codemod-core", version = "0.1.0" }
 tree-sitter.workspace = true
 tree-sitter-javascript.workspace = true
 tree-sitter-typescript.workspace = true

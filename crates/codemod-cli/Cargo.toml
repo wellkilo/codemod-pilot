@@ -4,15 +4,20 @@ version.workspace = true
 edition.workspace = true
 authors.workspace = true
 license.workspace = true
-description = "CLI interface for codemod-pilot"
+repository.workspace = true
+rust-version.workspace = true
+readme.workspace = true
+keywords.workspace = true
+categories.workspace = true
+description = "CLI interface for codemod-pilot — transform your codebase by example"
 
 [[bin]]
 name = "codemod-pilot"
 path = "src/main.rs"
 
 [dependencies]
-codemod-core = { path = "../codemod-core" }
-codemod-languages = { path = "../codemod-languages" }
+codemod-core = { path = "../codemod-core", version = "0.1.0" }
+codemod-languages = { path = "../codemod-languages", version = "0.1.0" }
 clap.workspace = true
 colored.workspace = true
 similar.workspace = true
@@ -24,4 +29,4 @@ serde_json.workspace = true
 serde_yaml.workspace = true
 log.workspace = true
 env_logger.workspace = true
-chrono = "0.4"
+chrono.workspace = true
