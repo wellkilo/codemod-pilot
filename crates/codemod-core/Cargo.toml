@@ -1,20 +1,29 @@
 [package]
 name = "codemod-core"
-version = "0.1.0"
-edition = "2021"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+readme.workspace = true
+keywords.workspace = true
+categories.workspace = true
 description = "Core engine for codemod-pilot: pattern inference, matching, and transformation"
-license = "MIT"
 
 [dependencies]
-tree-sitter = "0.24"
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
-serde_yaml = "0.9"
-anyhow = "1"
-thiserror = "2"
-walkdir = "2"
-globset = "0.4"
-rayon = "1"
-similar = "2"
-log = "0.4"
-chrono = "0.4"
+tree-sitter.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_yaml.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+walkdir.workspace = true
+globset.workspace = true
+rayon.workspace = true
+similar.workspace = true
+log.workspace = true
+chrono.workspace = true
+
+[dev-dependencies]
+tempfile = "3.12"
